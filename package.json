@@ -5,8 +5,8 @@
     "app/*"
   ],
   "scripts": {
-    "dev:web": "bun run --cwd apps/web dev",
-    "dev:api": "bun run --cwd apps/api dev",
+    "dev:web": "bun run --cwd app/frontend dev",
+    "dev:api": "bun run --cwd app/backend dev",
     "dev": "bun run dev:web & bun run dev:api"
   },
   "devDependencies": {
