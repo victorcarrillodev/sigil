@@ -10,6 +10,8 @@
     "dev": "bun run dev:web & bun run dev:api"
   },
   "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "^25.9.1",
     "typescript": "^6.0.3"
   }
 }
