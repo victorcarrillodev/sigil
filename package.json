@@ -1,0 +1,15 @@
+{
+  "name": "sigil",
+  "private": true,
+  "workspaces": [
+    "app/*"
+  ],
+  "scripts": {
+    "dev:web": "bun run --cwd apps/web dev",
+    "dev:api": "bun run --cwd apps/api dev",
+    "dev": "bun run dev:web & bun run dev:api"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3"
+  }
+}
