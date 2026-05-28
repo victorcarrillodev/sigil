@@ -7,14 +7,14 @@ generator client {
   output   = "../generated/prisma"
 }
 
-// 1. Definición de Roles para el Control de Accesos
+// Roles definition for Access Control
 enum Rol {
   ADMIN
   PRODUCTOR
   CLIENTE
 }
 
-// 2. Modelo de Empresas
+//Cmpany model
 model Empresa {
   id            String             @id @default(uuid())
   nombre        String
@@ -25,7 +25,7 @@ model Empresa {
   asignaciones  AsignacionMusica[]
 }
 
-// 3. Modelo de Usuarios (Admin, Productor, Cliente)
+// Users Model (Admin, Producer, Client)
 model Usuario {
   id           String             @id @default(uuid())
   nombre       String
@@ -43,7 +43,7 @@ model Usuario {
   asignacionesHechas AsignacionMusica[]
 }
 
-// 4. Modelo de Dispositivos (Hardware único)
+// Devices Model (Umique Hardware)
 model Dispositivo {
   id              String   @id @default(uuid())
   dispositivoUuid String   @unique // Aquí guardas la dirección MAC, serial o token único del chip
@@ -70,7 +70,7 @@ model Cancion {
   asignaciones AsignacionMusica[]
 }
 
-// 6. Tabla Intermedia: Controla qué música va a qué empresa
+// Controls what song goes to wich company
 model AsignacionMusica {
   id            String   @id @default(uuid())
   fechaAsignado DateTime @default(now())
@@ -81,10 +81,10 @@ model AsignacionMusica {
   cancionId     String
   cancion       Cancion  @relation(fields: [cancionId], references: [id])
   
-  // Registro de qué productor realizó la acción
+  // Register of wich product makes tha action
   asignadoPorId String
   asignadoPor   Usuario  @relation(fields: [asignadoPorId], references: [id])
 
-  // Restricción: Evita asignar la misma canción más de una vez a la misma empresa
+  // Restriction: Avoid to assign the same song more than once to the same company
   @@unique([empresaId, cancionId])
 }
