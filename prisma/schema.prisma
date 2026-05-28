@@ -7,8 +7,60 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id      Int    @id @default(autoincrement())
-  name    String @db.VarChar(200)
-  modelo  String @unique @db.VarChar(255)
+model Empresas {
+  id            Int            @id @default(autoincrement())
+  name          String         @db.VarChar(200)
+  fecha         DateTime
+
+  usuarios      Usuarios[]
+  dispositivos  Dispositivos[]
+  musica        Musica[]
+}
+
+model Usuarios {
+  id          Int       @id @default(autoincrement())
+  name        String    @db.VarChar(200)
+  email       String    @unique @db.VarChar(200)
+  password    String    @db.VarChar(200)
+  role        String    @db.VarChar(10)
+
+  empresaId   Int
+  empresa     Empresas  @relation(fields: [empresaId], references: [id])
+
+  canciones   Canciones[]
+  musica      Musica[]
+}
+
+model Dispositivos {
+  id          Int       @id @default(autoincrement())
+  dispositivo String    @unique @db.VarChar(200)
+  name        String    @db.VarChar(200)
+  estado      String    @db.VarChar(20)
+
+  empresaId   Int
+  empresa     Empresas  @relation(fields: [empresaId], references: [id])
+}
+
+model Canciones {
+  id           Int        @id @default(autoincrement())
+  titulo       String     @db.VarChar(200)
+  urlCancion   String     @db.VarChar(200)
+
+  subidoPorId  Int
+  subidoPor    Usuarios   @relation(fields: [subidoPorId], references: [id])
+
+  musica       Musica[]
+}
+
+model Musica {
+  id             Int        @id @default(autoincrement())
+
+  empresaId      Int
+  empresa         Empresas   @relation(fields: [empresaId], references: [id])
+
+  cancionId      Int
+  cancion         Canciones  @relation(fields: [cancionId], references: [id])
+
+  asignadoPorId  Int
+  asignadoPor    Usuarios    @relation(fields: [asignadoPorId], references: [id])
 }
