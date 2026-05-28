@@ -1,0 +1,90 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+// Roles definition for Access Control
+enum Rol {
+  ADMIN
+  PRODUCTOR
+  CLIENTE
+}
+
+//Cmpany model
+model Empresa {
+  id            String             @id @default(uuid())
+  nombre        String
+  fechaRegistro DateTime           @default(now())
+  
+  usuarios      Usuario[]
+  dispositivos  Dispositivo[]
+  asignaciones  AsignacionMusica[]
+}
+
+// Users Model (Admin, Producer, Client)
+model Usuario {
+  id           String             @id @default(uuid())
+  nombre       String
+  email        String             @unique
+  passwordHash String
+  rol          Rol
+  
+  // Relación opcional con Empresa: Un cliente pertenece a una empresa.
+  // Admins y Productores pueden tener este campo como null (alcance global).
+  empresaId    String?
+  empresa      Empresa?           @relation(fields: [empresaId], references: [id])
+  
+  // Relaciones inversas
+  cancionesSubidas Cancion[]
+  asignacionesHechas AsignacionMusica[]
+}
+
+// Devices Model (Umique Hardware)
+model Dispositivo {
+  id              String   @id @default(uuid())
+  dispositivoUuid String   @unique // Aquí guardas la dirección MAC, serial o token único del chip
+  nombre          String   // Ej: "Altavoz Pasillo Principal"
+  estado          String   @default("offline") // online, offline, playing
+  fechaRegistro   DateTime @default(now())
+  
+  // Relación obligatoria: Cada dispositivo pertenece a una empresa
+  empresaId       String
+  empresa         Empresa  @relation(fields: [empresaId], references: [id])
+}
+
+// 5. Modelo de Canciones
+model Cancion {
+  id           String             @id @default(uuid())
+  titulo       String
+  urlArchivo   String             // URL del almacenamiento en la nube (ej. S3, Firebase)
+  fechaSubida  DateTime           @default(now())
+  
+  // Relación: Quién subió la canción (Productor o Admin)
+  subidoPorId  String
+  subidoPor    Usuario            @relation(fields: [subidoPorId], references: [id])
+  
+  asignaciones AsignacionMusica[]
+}
+
+// Controls what song goes to wich company
+model AsignacionMusica {
+  id            String   @id @default(uuid())
+  fechaAsignado DateTime @default(now())
+  
+  empresaId     String
+  empresa       Empresa  @relation(fields: [empresaId], references: [id])
+  
+  cancionId     String
+  cancion       Cancion  @relation(fields: [cancionId], references: [id])
+  
+  // Register of wich product makes tha action
+  asignadoPorId String
+  asignadoPor   Usuario  @relation(fields: [asignadoPorId], references: [id])
+
+  // Restriction: Avoid to assign the same song more than once to the same company
+  @@unique([empresaId, cancionId])
+}
