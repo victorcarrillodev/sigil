@@ -63,4 +63,5 @@ model Musica {
 
   asignadoPorId  Int
   asignadoPor    Usuarios    @relation(fields: [asignadoPorId], references: [id])
+  
 }
