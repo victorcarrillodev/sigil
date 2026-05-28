@@ -1,67 +1,90 @@
-generator client {
-  provider = "prisma-client-js"
-}
-
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
-model Empresas {
-  id            Int            @id @default(autoincrement())
-  name          String         @db.VarChar(200)
-  fecha         DateTime
-
-  usuarios      Usuarios[]
-  dispositivos  Dispositivos[]
-  musica        Musica[]
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
 }
 
-model Usuarios {
-  id          Int       @id @default(autoincrement())
-  name        String    @db.VarChar(200)
-  email       String    @unique @db.VarChar(200)
-  password    String    @db.VarChar(200)
-  role        String    @db.VarChar(10)
-
-  empresaId   Int
-  empresa     Empresas  @relation(fields: [empresaId], references: [id])
-
-  canciones   Canciones[]
-  musica      Musica[]
+// 1. Definición de Roles para el Control de Accesos
+enum Rol {
+  ADMIN
+  PRODUCTOR
+  CLIENTE
 }
 
-model Dispositivos {
-  id          Int       @id @default(autoincrement())
-  dispositivo String    @unique @db.VarChar(200)
-  name        String    @db.VarChar(200)
-  estado      String    @db.VarChar(20)
-
-  empresaId   Int
-  empresa     Empresas  @relation(fields: [empresaId], references: [id])
-}
-
-model Canciones {
-  id           Int        @id @default(autoincrement())
-  titulo       String     @db.VarChar(200)
-  urlCancion   String     @db.VarChar(200)
-
-  subidoPorId  Int
-  subidoPor    Usuarios   @relation(fields: [subidoPorId], references: [id])
-
-  musica       Musica[]
-}
-
-model Musica {
-  id             Int        @id @default(autoincrement())
-
-  empresaId      Int
-  empresa         Empresas   @relation(fields: [empresaId], references: [id])
-
-  cancionId      Int
-  cancion         Canciones  @relation(fields: [cancionId], references: [id])
-
-  asignadoPorId  Int
-  asignadoPor    Usuarios    @relation(fields: [asignadoPorId], references: [id])
+// 2. Modelo de Empresas
+model Empresa {
+  id            String             @id @default(uuid())
+  nombre        String
+  fechaRegistro DateTime           @default(now())
   
+  usuarios      Usuario[]
+  dispositivos  Dispositivo[]
+  asignaciones  AsignacionMusica[]
+}
+
+// 3. Modelo de Usuarios (Admin, Productor, Cliente)
+model Usuario {
+  id           String             @id @default(uuid())
+  nombre       String
+  email        String             @unique
+  passwordHash String
+  rol          Rol
+  
+  // Relación opcional con Empresa: Un cliente pertenece a una empresa.
+  // Admins y Productores pueden tener este campo como null (alcance global).
+  empresaId    String?
+  empresa      Empresa?           @relation(fields: [empresaId], references: [id])
+  
+  // Relaciones inversas
+  cancionesSubidas Cancion[]
+  asignacionesHechas AsignacionMusica[]
+}
+
+// 4. Modelo de Dispositivos (Hardware único)
+model Dispositivo {
+  id              String   @id @default(uuid())
+  dispositivoUuid String   @unique // Aquí guardas la dirección MAC, serial o token único del chip
+  nombre          String   // Ej: "Altavoz Pasillo Principal"
+  estado          String   @default("offline") // online, offline, playing
+  fechaRegistro   DateTime @default(now())
+  
+  // Relación obligatoria: Cada dispositivo pertenece a una empresa
+  empresaId       String
+  empresa         Empresa  @relation(fields: [empresaId], references: [id])
+}
+
+// 5. Modelo de Canciones
+model Cancion {
+  id           String             @id @default(uuid())
+  titulo       String
+  urlArchivo   String             // URL del almacenamiento en la nube (ej. S3, Firebase)
+  fechaSubida  DateTime           @default(now())
+  
+  // Relación: Quién subió la canción (Productor o Admin)
+  subidoPorId  String
+  subidoPor    Usuario            @relation(fields: [subidoPorId], references: [id])
+  
+  asignaciones AsignacionMusica[]
+}
+
+// 6. Tabla Intermedia: Controla qué música va a qué empresa
+model AsignacionMusica {
+  id            String   @id @default(uuid())
+  fechaAsignado DateTime @default(now())
+  
+  empresaId     String
+  empresa       Empresa  @relation(fields: [empresaId], references: [id])
+  
+  cancionId     String
+  cancion       Cancion  @relation(fields: [cancionId], references: [id])
+  
+  // Registro de qué productor realizó la acción
+  asignadoPorId String
+  asignadoPor   Usuario  @relation(fields: [asignadoPorId], references: [id])
+
+  // Restricción: Evita asignar la misma canción más de una vez a la misma empresa
+  @@unique([empresaId, cancionId])
 }
