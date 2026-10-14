@@ -1,0 +1,8 @@
+node_modules/
+bun.lock
+.playwright-mcp/
+.git/
+NUL
+artifacts/
+public/fonts/
+public/vendor/
