@@ -6,3 +6,5 @@ node_modules/
 NUL
 artifacts/
 coverage/
+dist/
+.vite/

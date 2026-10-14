@@ -9,7 +9,7 @@ export interface ServerConfig {
 }
 
 export function readServerConfig(environment: Environment): ServerConfig {
-  const rawPort = environment.PORT ?? environment.BUN_PORT ?? "3000";
+  const rawPort = environment.PORT ?? environment.BUN_PORT ?? "3100";
   const port = Number(rawPort);
   const hostname = environment.HOST ?? "127.0.0.1";
 

@@ -2,12 +2,14 @@
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "files": {
     "includes": [
-      "public/js/**/*.js",
+      "src/**/*.ts",
+      "src/**/*.tsx",
       "server.ts",
       "server/**/*.ts",
       "scripts/**/*.ts",
       "tests/**/*.ts",
-      "tests/**/*.js"
+      "tests/**/*.tsx",
+      "vite.config.ts"
     ]
   },
   "formatter": { "enabled": false },

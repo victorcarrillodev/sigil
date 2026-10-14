@@ -1,17 +1,29 @@
 # Diseño y verificación
 
+## Arquitectura React y TypeScript
+
+La aplicación vive en `src/modulos` y aplica Atomic Design: átomos, moléculas, organismos, plantillas y páginas. Cada componente tiene una carpeta y un archivo con su propio nombre. La lógica específica comparte su carpeta; las funciones de validación del formulario se prueban sin depender del DOM. Los estilos y tokens compartidos están en `src/estilos`.
+
+Vite compila React y TypeScript, empaqueta los estilos y carga la escena Three.js bajo demanda. El build prerenderiza `App` en el HTML inicial; `src/main.tsx` hidrata ese contenido en producción y monta React en desarrollo. El servidor Bun sirve únicamente `dist/`, con la misma CSP restrictiva y protección de rutas. El build conserva fuentes, imágenes y licencias, sin copiar la aplicación estática anterior.
+
 ## Criterios de la interfaz
 
 - Mantener el archivo original del logo en cabecera y pie de página. El archivo de la web coincide con el adjunto original.
 - La escena Three.js interpreta el ojo y los circuitos del logo como trazos y partículas, con tres capas de líneas transparentes que aportan profundidad. El emblema protagoniza la composición y puede descomponerse y recomponerse mediante un control explícito.
 - La navegación y el formulario se inicializan antes de cargar la escena. Si la importación o WebGL falla, se conserva una ilustración vectorial estática del símbolo y las capas.
-- Usar una escala tipográfica, colores y espaciado compartidos en `tokens.css`. La sección clara permite distinguir el enfoque del catálogo de servicios.
+- Usar una escala tipográfica, colores y espaciado compartidos en `src/estilos/tokens.css`. La sección clara permite distinguir el enfoque del catálogo de servicios.
 - Comunicar capacidades y proceso sin cifras de clientes, testimonios, certificaciones ni tiempos de respuesta que no se hayan confirmado.
 - Mostrar el estado real del contacto: solicitud preparada localmente, sin entrega a un receptor.
 
 ## Verificación realizada
 
-La validación automatizada reúne lint, formato, TypeScript estricto y pruebas de servidor, formulario y distribución local de Three.js. También se revisó la interfaz en el navegador integrado.
+La migración a React y TypeScript se validó con `bun run validate`: reglas de código, formato, tipos estrictos, 48 pruebas y compilación de producción con prerenderizado. La fuente activa de la interfaz contiene únicamente archivos `.ts` y `.tsx`; la versión estática completa quedó archivada en `artifacts/legacy-static`, fuera de la compilación.
+
+En el navegador integrado se comprobó la versión React de desarrollo y la compilación servida por Bun. No se observaron errores de consola ni de hidratación. Los filtros muestran tres servicios por categoría; los enlaces del footer recuperan las tarjetas ocultas incluso al volver al mismo fragmento de URL. El formulario conserva la preselección del servicio, enfoca el primer campo con error, genera el resumen y permite copiarlo y descargarlo. Editar los campos invalida el resumen y su descarga.
+
+Los controles de Three.js cambian el estado de descomposición y pausa mediante React. En producción se verificó la pantalla de 320 px sin desbordamiento horizontal y un único canvas. El menú móvil cierra con Escape y devuelve el foco a su botón. El HTML prerenderizado conserva el contenido y el botón del formulario deshabilitado antes de la hidratación. Estas comprobaciones no constituyen una auditoría completa de accesibilidad ni sustituyen las pruebas en dispositivos físicos.
+
+La validación automatizada reúne lint, formato, TypeScript estricto, pruebas de servidor y formulario, compilación de React y prerenderizado del contenido. Las comprobaciones de interacción se repiten sobre la versión React en el navegador integrado. Three.js se empaqueta como dependencia local, con su licencia incluida en el build.
 
 | Comprobación                                  | Resultado                                                                                  |
 | --------------------------------------------- | ------------------------------------------------------------------------------------------ |

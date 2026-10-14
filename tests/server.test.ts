@@ -42,7 +42,7 @@ function requiredHeader(response: Response, name: string): string {
 
 describe("server configuration", () => {
   test("uses defaults and environment precedence", () => {
-    expect(readServerConfig({})).toEqual({ port: 3000, hostname: "127.0.0.1", production: false });
+    expect(readServerConfig({})).toEqual({ port: 3100, hostname: "127.0.0.1", production: false });
     expect(readServerConfig({ BUN_PORT: "4321" }).port).toBe(4321);
     expect(
       readServerConfig({ PORT: "4322", BUN_PORT: "4321", HOST: "0.0.0.0", NODE_ENV: "production" }),

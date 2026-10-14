@@ -6,3 +6,5 @@ NUL
 artifacts/
 public/fonts/
 public/vendor/
+dist/
+.vite/
