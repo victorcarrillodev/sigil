@@ -32,7 +32,7 @@ export const SERVICES: readonly Service[] = [
     category: "software",
     icon: "web",
     description:
-      "Haz que tus clientes encuentren lo que ofreces y sepan cómo comprarte. Diseñamos sitios, catálogos y tiendas con tus productos, servicios y formas de contacto.",
+      "Presenta tus servicios o vende tus productos con una web que facilite a tus clientes dar el siguiente paso.",
     tags: ["Sitios web", "Portales", "Comercio electrónico"],
     action: "Cotizar mi web",
   },
@@ -42,7 +42,7 @@ export const SERVICES: readonly Service[] = [
     category: "software",
     icon: "management",
     description:
-      "Deja de buscar información entre archivos y mensajes. Reúne clientes, ventas, inventarios y cotizaciones en un sistema pensado para las tareas de tu negocio.",
+      "Reúne ventas, clientes e inventarios en un sistema que tu equipo pueda consultar y mantener al día.",
     tags: ["Clientes y ventas", "Inventarios", "Paneles de control"],
     action: "Cotizar mi sistema",
   },
@@ -53,7 +53,7 @@ export const SERVICES: readonly Service[] = [
     category: "software",
     icon: "code",
     description:
-      "Dedica menos tiempo a tareas repetitivas. Creamos herramientas que se adaptan a tu forma de trabajar, conectan tus aplicaciones y reducen la captura duplicada de datos.",
+      "Creamos herramientas para tu forma de trabajar y conectamos tus aplicaciones para reducir la captura manual de datos.",
     tags: ["Integraciones", "Automatización", "Aplicaciones"],
     action: "Cotizar software a medida",
   },
@@ -63,7 +63,7 @@ export const SERVICES: readonly Service[] = [
     category: "infrastructure",
     icon: "network",
     description:
-      "¿El Wi-Fi falla o tus equipos te hacen perder tiempo? Revisamos el problema y resolvemos la configuración, el cableado o el mantenimiento que necesites.",
+      "Resolvemos fallas de conexión y equipos. Revisamos tu instalación y atendemos la configuración o el mantenimiento que necesites.",
     tags: ["Redes", "Wi-Fi empresarial", "Mantenimiento"],
     action: "Cotizar soporte y redes",
   },
@@ -73,7 +73,7 @@ export const SERVICES: readonly Service[] = [
     category: "infrastructure",
     icon: "camera",
     description:
-      "Mantén a la vista lo que ocurre en tu negocio. Diseñamos e instalamos sistemas de cámaras para tus espacios, con acceso a las grabaciones y almacenamiento según tus necesidades.",
+      "Instalamos cámaras según tus espacios y configuramos el acceso a las grabaciones para que puedas consultar lo que ocurre.",
     tags: ["Cámaras IP", "Grabación NVR", "Acceso remoto"],
     action: "Cotizar mis cámaras",
   },
@@ -83,7 +83,7 @@ export const SERVICES: readonly Service[] = [
     category: "infrastructure",
     icon: "server",
     description:
-      "Cuida la información que sostiene tu negocio. Configuramos servidores, accesos y respaldos para tus aplicaciones, con un plan para recuperar tus datos cuando lo necesites.",
+      "Organizamos dónde guardar tu información, quién puede acceder y cómo recuperarla ante un imprevisto.",
     tags: ["Servidores", "Nube", "Copias de seguridad"],
     action: "Cotizar servidores y respaldos",
   },

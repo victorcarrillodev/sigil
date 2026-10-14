@@ -59,12 +59,6 @@ export function HeroScene() {
 
   return (
     <figure className="hero-visual">
-      <div className="visual-heading">
-        <span className="mono">SIGIL / SISTEMAS CONECTADOS</span>
-        <span className="visual-cross" aria-hidden="true">
-          +
-        </span>
-      </div>
       <div
         className="hero-scene"
         id="hero-scene"

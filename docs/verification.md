@@ -47,6 +47,24 @@ El pie de página organiza los seis servicios y la navegación del proyecto. Sus
 
 El envío sin JavaScript se evita mediante un botón deshabilitado en el HTML, que solo se habilita después de registrar los controladores del formulario. El menú y el contenido siguen siendo legibles sin JavaScript. El CSS respeta la preferencia de movimiento reducido.
 
+## Revisión de UX posterior a la migración
+
+Se mejoró la jerarquía de las tarjetas, la legibilidad de textos y formularios, los filtros y la presentación de la propuesta. El proceso usa una secuencia vertical en pantallas pequeñas. Los accesos de portada apuntan a servicios concretos y restauran el filtro general para mostrar su destino.
+
+Se revisó la interfaz en Chromium a 1280, 390 y 320 px. En 320 px no se observaron elementos fuera del ancho disponible. Se comprobaron el filtro de infraestructura (tres tarjetas), el acceso de portada a web tras filtrar (seis tarjetas y destino visible), el cierre del menú al navegar, la apertura de preguntas frecuentes, la preselección del servicio y la validación del formulario con datos ficticios. El resumen conserva el aviso de que no se ha enviado. Los datos de prueba se limpiaron al finalizar y no se observaron errores de consola. `bun run validate` pasó con 48 pruebas y compilación prerenderizada; continúa el aviso de tamaño del fragmento de Three.js, que se carga por separado.
+
+Capturas de esta revisión: `artifacts/sigil-ux-desktop.jpg` y `artifacts/sigil-ux-mobile.jpg`.
+
+### Variedad visual
+
+La siguiente iteración visual incorpora seis ilustraciones SVG decorativas, bloques destacados para web y soporte y un proceso por filas en escritorio. Las ilustraciones representan servicios; no son capturas de proyectos de clientes. Los componentes y estilos nuevos viven en sus carpetas dentro de `src/modulos/moleculas`. Se comprobaron anchos de 320, 390, 900 y 1280 px, filtros y preselección del servicio. La compilación de producción conserva las seis ilustraciones, los estilos de cada bloque y el proceso por filas, sin errores de consola observados. Las 48 pruebas, lint, formato, tipos y compilación pasaron. Capturas: `artifacts/sigil-variedad-desktop.jpg`, `artifacts/sigil-variedad-tablet.jpg` y `artifacts/sigil-variedad-mobile.jpg`.
+
+### Ajustes solicitados de espacio y contenido
+
+Se retiraron los rótulos de pequeñas empresas, la cabecera decorativa de la escena, la franja de accesos de portada, las etiquetas numeradas de enfoque y proceso, la etiqueta de la propuesta y la firma del footer. Las tarjetas volvieron a tres columnas de igual ancho y se compactaron sus espacios e ilustraciones. A 1366 × 548 px, las seis tarjetas miden 368 px de alto. A 320 × 760 px miden entre 462 y 489 px, sin desbordamiento horizontal. El footer reduce espacios, descripción y tamaño de marca; en móvil agrupa los enlaces en dos columnas.
+
+El resumen de solicitud es un hermano del panel del formulario dentro de la cuadrícula del contacto, con todas las columnas disponibles. Se comprobó un ancho de 1216 px en un contenedor con ese mismo ancho útil, copia correcta e invalidación al editar. Los datos ficticios se limpiaron al terminar. Pasaron las 48 pruebas, lint, formato, tipos y compilación. Capturas: `artifacts/sigil-tarjetas-compactas.jpg`, `artifacts/sigil-resumen-ancho.jpg` y `artifacts/sigil-footer-compacto.jpg`.
+
 ## Antes de habilitar el contacto
 
 Definir un receptor real y conectar el envío, comprobar su resultado y actualizar el texto del formulario. Revisar con el negocio los servicios, condiciones de soporte y contenido comercial. Esta versión no tiene un canal de entrega ni un despliegue público configurados.

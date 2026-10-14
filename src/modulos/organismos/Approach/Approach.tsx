@@ -1,5 +1,4 @@
 import { ActionLink } from "../../atomos/ActionLink/ActionLink";
-import { Eyebrow } from "../../atomos/Eyebrow/Eyebrow";
 import { QuoteProposal } from "../../moleculas/QuoteProposal/QuoteProposal";
 import { TrustValue } from "../../moleculas/TrustValue/TrustValue";
 
@@ -29,7 +28,6 @@ export function Approach() {
     <section className="approach light-section" id="enfoque" aria-labelledby="approach-title">
       <div className="container approach-grid">
         <div className="approach-copy">
-          <Eyebrow>02 / Nuestro enfoque</Eyebrow>
           <h2 id="approach-title">
             La tecnología
             <br />

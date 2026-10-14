@@ -42,11 +42,7 @@ export function Footer({ onServiceNavigate }: FooterProps) {
       <div className="container footer-layout">
         <div className="footer-identity">
           <Brand footer />
-          <p>
-            En Sigil desarrollamos soluciones digitales para tu negocio. Conectamos tu web, tus
-            sistemas y tu infraestructura para facilitar el trabajo de tu equipo.
-          </p>
-          <span className="footer-signature mono">IDEAS. SISTEMAS. RESULTADOS.</span>
+          <p>Web, software e infraestructura para tu negocio.</p>
         </div>
         {COLUMNS.map((column) => (
           <FooterColumn key={column.id} {...column} onServiceNavigate={onServiceNavigate} />
@@ -54,9 +50,6 @@ export function Footer({ onServiceNavigate }: FooterProps) {
       </div>
       <div className="container footer-bottom">
         <p>© 2026 Sigil · Soluciones digitales</p>
-        <ActionLink className="back-top" href="#top">
-          Volver al inicio
-        </ActionLink>
       </div>
     </footer>
   );

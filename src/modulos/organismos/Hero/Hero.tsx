@@ -1,11 +1,11 @@
 import { Icon } from "../../atomos/Icon/Icon";
-import { Eyebrow } from "../../atomos/Eyebrow/Eyebrow";
+
 import { HeroScene } from "../../moleculas/HeroScene/HeroScene";
+
 export function Hero() {
   return (
     <section className="hero container" aria-labelledby="hero-title">
       <div className="hero-copy">
-        <Eyebrow withLine>Para pequeñas empresas</Eyebrow>
         <h1 id="hero-title">
           Web, software
           <br />y <span className="accent-text">soporte.</span>
@@ -29,23 +29,6 @@ export function Hero() {
         </div>
       </div>
       <HeroScene />
-      <nav className="hero-index" aria-label="Áreas de especialidad">
-        <a href="#servicios">
-          <span className="index-number">01 /</span>
-          <span>Sitios web y tiendas</span>
-          <Icon name="diagonal" className="icon" />
-        </a>
-        <a href="#servicios">
-          <span className="index-number">02 /</span>
-          <span>Software para tu operación</span>
-          <Icon name="diagonal" className="icon" />
-        </a>
-        <a href="#servicios">
-          <span className="index-number">03 /</span>
-          <span>Infraestructura que conecta</span>
-          <Icon name="diagonal" className="icon" />
-        </a>
-      </nav>
     </section>
   );
 }

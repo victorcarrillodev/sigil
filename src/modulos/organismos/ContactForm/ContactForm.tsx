@@ -171,167 +171,169 @@ export function ContactForm({ selectedService = "" }: ContactFormProps) {
 
   return (
     <>
-      <form
-        id="contact-form"
-        className="contact-form"
-        action="/contact-unavailable"
-        method="post"
-        noValidate
-        onSubmit={prepareRequest}
-      >
-        <div className="form-heading">
-          <h3>Prepara tu solicitud de cotización</h3>
-          <p>Los campos con * son obligatorios.</p>
-        </div>
-        <div className="form-row">
+      <div className="contact-panel">
+        <form
+          id="contact-form"
+          className="contact-form"
+          action="/contact-unavailable"
+          method="post"
+          noValidate
+          onSubmit={prepareRequest}
+        >
+          <div className="form-heading">
+            <h3>Prepara tu solicitud de cotización</h3>
+            <p>Los campos con * son obligatorios.</p>
+          </div>
+          <div className="form-row">
+            <div className="field">
+              <label htmlFor="nombre">
+                Tu nombre <span>*</span>
+              </label>
+              <input
+                ref={(node) => {
+                  fields.current.nombre = node;
+                }}
+                id="nombre"
+                name="nombre"
+                autoComplete="name"
+                placeholder="¿Cómo te llamas?"
+                required
+                minLength={2}
+                maxLength={80}
+                aria-describedby="nombre-error"
+                aria-invalid={errors.nombre ? true : undefined}
+                value={values.nombre}
+                onChange={(event) => changeField("nombre", event.currentTarget.value)}
+                onBlur={() => blurField("nombre")}
+              />
+              <span className="field-error" id="nombre-error">
+                {errors.nombre}
+              </span>
+            </div>
+            <div className="field">
+              <label htmlFor="empresa">
+                Empresa <span className="optional">(opcional)</span>
+              </label>
+              <input
+                ref={(node) => {
+                  fields.current.empresa = node;
+                }}
+                id="empresa"
+                name="empresa"
+                autoComplete="organization"
+                placeholder="Nombre de tu negocio"
+                maxLength={100}
+                aria-describedby="empresa-error"
+                aria-invalid={errors.empresa ? true : undefined}
+                value={values.empresa}
+                onChange={(event) => changeField("empresa", event.currentTarget.value)}
+                onBlur={() => blurField("empresa")}
+              />
+              <span className="field-error" id="empresa-error">
+                {errors.empresa}
+              </span>
+            </div>
+          </div>
           <div className="field">
-            <label htmlFor="nombre">
-              Tu nombre <span>*</span>
+            <label htmlFor="email">
+              Correo electrónico <span>*</span>
             </label>
             <input
               ref={(node) => {
-                fields.current.nombre = node;
+                fields.current.email = node;
               }}
-              id="nombre"
-              name="nombre"
-              autoComplete="name"
-              placeholder="¿Cómo te llamas?"
+              id="email"
+              name="email"
+              type="email"
+              autoComplete="email"
+              placeholder="tu@empresa.com"
               required
-              minLength={2}
-              maxLength={80}
-              aria-describedby="nombre-error"
-              aria-invalid={errors.nombre ? true : undefined}
-              value={values.nombre}
-              onChange={(event) => changeField("nombre", event.currentTarget.value)}
-              onBlur={() => blurField("nombre")}
+              maxLength={254}
+              aria-describedby="email-error"
+              aria-invalid={errors.email ? true : undefined}
+              value={values.email}
+              onChange={(event) => changeField("email", event.currentTarget.value)}
+              onBlur={() => blurField("email")}
             />
-            <span className="field-error" id="nombre-error">
-              {errors.nombre}
+            <span className="field-error" id="email-error">
+              {errors.email}
             </span>
           </div>
           <div className="field">
-            <label htmlFor="empresa">
-              Empresa <span className="optional">(opcional)</span>
+            <label htmlFor="linea">
+              ¿Qué necesitas? <span>*</span>
             </label>
-            <input
+            <select
               ref={(node) => {
-                fields.current.empresa = node;
+                fields.current.linea = node;
               }}
-              id="empresa"
-              name="empresa"
-              autoComplete="organization"
-              placeholder="Nombre de tu negocio"
-              maxLength={100}
-              aria-describedby="empresa-error"
-              aria-invalid={errors.empresa ? true : undefined}
-              value={values.empresa}
-              onChange={(event) => changeField("empresa", event.currentTarget.value)}
-              onBlur={() => blurField("empresa")}
-            />
-            <span className="field-error" id="empresa-error">
-              {errors.empresa}
+              id="linea"
+              name="linea"
+              required
+              aria-describedby="linea-error"
+              aria-invalid={errors.linea ? true : undefined}
+              value={values.linea}
+              onChange={(event) => changeField("linea", event.currentTarget.value)}
+              onBlur={() => blurField("linea")}
+            >
+              <option value="">Selecciona un servicio</option>
+              {Object.entries(SERVICE_LABELS).map(([id, label]) => (
+                <option key={id} value={id}>
+                  {label}
+                </option>
+              ))}
+            </select>
+            <span className="field-error" id="linea-error">
+              {errors.linea}
             </span>
           </div>
-        </div>
-        <div className="field">
-          <label htmlFor="email">
-            Correo electrónico <span>*</span>
-          </label>
-          <input
-            ref={(node) => {
-              fields.current.email = node;
-            }}
-            id="email"
-            name="email"
-            type="email"
-            autoComplete="email"
-            placeholder="tu@empresa.com"
-            required
-            maxLength={254}
-            aria-describedby="email-error"
-            aria-invalid={errors.email ? true : undefined}
-            value={values.email}
-            onChange={(event) => changeField("email", event.currentTarget.value)}
-            onBlur={() => blurField("email")}
-          />
-          <span className="field-error" id="email-error">
-            {errors.email}
-          </span>
-        </div>
-        <div className="field">
-          <label htmlFor="linea">
-            ¿Qué necesitas? <span>*</span>
-          </label>
-          <select
-            ref={(node) => {
-              fields.current.linea = node;
-            }}
-            id="linea"
-            name="linea"
-            required
-            aria-describedby="linea-error"
-            aria-invalid={errors.linea ? true : undefined}
-            value={values.linea}
-            onChange={(event) => changeField("linea", event.currentTarget.value)}
-            onBlur={() => blurField("linea")}
-          >
-            <option value="">Selecciona un servicio</option>
-            {Object.entries(SERVICE_LABELS).map(([id, label]) => (
-              <option key={id} value={id}>
-                {label}
-              </option>
-            ))}
-          </select>
-          <span className="field-error" id="linea-error">
-            {errors.linea}
-          </span>
-        </div>
-        <div className="field">
-          <label htmlFor="mensaje">
-            Cuéntanos un poco más <span>*</span>
-          </label>
-          <textarea
-            ref={(node) => {
-              fields.current.mensaje = node;
-            }}
-            id="mensaje"
-            name="mensaje"
-            rows={4}
-            placeholder="¿Qué quieres mejorar en tu negocio? ¿Cómo trabaja hoy tu equipo?"
-            required
-            minLength={20}
-            maxLength={2000}
-            aria-describedby="mensaje-hint mensaje-error"
-            aria-invalid={errors.mensaje ? true : undefined}
-            value={values.mensaje}
-            onChange={(event) => changeField("mensaje", event.currentTarget.value)}
-            onBlur={() => blurField("mensaje")}
-          />
-          <div className="field-meta">
-            <span id="mensaje-hint">Al menos 20 caracteres.</span>
-            <span id="mensaje-count">{values.mensaje.length} / 2000</span>
+          <div className="field">
+            <label htmlFor="mensaje">
+              Cuéntanos un poco más <span>*</span>
+            </label>
+            <textarea
+              ref={(node) => {
+                fields.current.mensaje = node;
+              }}
+              id="mensaje"
+              name="mensaje"
+              rows={4}
+              placeholder="¿Qué quieres mejorar en tu negocio? ¿Cómo trabaja hoy tu equipo?"
+              required
+              minLength={20}
+              maxLength={2000}
+              aria-describedby="mensaje-hint mensaje-error"
+              aria-invalid={errors.mensaje ? true : undefined}
+              value={values.mensaje}
+              onChange={(event) => changeField("mensaje", event.currentTarget.value)}
+              onBlur={() => blurField("mensaje")}
+            />
+            <div className="field-meta">
+              <span id="mensaje-hint">Al menos 20 caracteres.</span>
+              <span id="mensaje-count">{values.mensaje.length} / 2000</span>
+            </div>
+            <span className="field-error" id="mensaje-error">
+              {errors.mensaje}
+            </span>
           </div>
-          <span className="field-error" id="mensaje-error">
-            {errors.mensaje}
-          </span>
-        </div>
-        <button className="button button-primary form-submit" type="submit" disabled={!ready}>
-          Preparar solicitud <Icon name="arrow" />
-        </button>
-        <p className="form-privacy">
-          Este formulario crea un resumen en tu navegador. No envía ni almacena tus datos en un
-          servidor.
-        </p>
-        <p id="form-status" className="form-status" role="status" aria-live="polite">
-          {status}
-        </p>
-        <noscript>
-          <p className="form-status">
-            Activa JavaScript para preparar el resumen de tu proyecto. El canal de contacto está
-            pendiente de habilitación.
+          <button className="button button-primary form-submit" type="submit" disabled={!ready}>
+            Preparar solicitud <Icon name="arrow" />
+          </button>
+          <p className="form-privacy">
+            Este formulario crea un resumen en tu navegador. No envía ni almacena tus datos en un
+            servidor.
           </p>
-        </noscript>
-      </form>
+          <p id="form-status" className="form-status" role="status" aria-live="polite">
+            {status}
+          </p>
+          <noscript>
+            <p className="form-status">
+              Activa JavaScript para preparar el resumen de tu proyecto. El canal de contacto está
+              pendiente de habilitación.
+            </p>
+          </noscript>
+        </form>
+      </div>
       <section
         className="request-summary"
         id="request-summary"

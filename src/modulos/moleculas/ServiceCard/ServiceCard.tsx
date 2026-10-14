@@ -3,6 +3,8 @@ import { ActionLink } from "../../atomos/ActionLink/ActionLink";
 import { isPrimaryLinkClick } from "../../atomos/ActionLink/anchor-events";
 import { Icon } from "../../atomos/Icon/Icon";
 import { SERVICE_LABELS, type Service, type ServiceId } from "./services";
+import { ServiceArtwork } from "../ServiceArtwork/ServiceArtwork";
+import "./ServiceCard.css";
 
 interface ServiceCardProps {
   readonly service: Service;
@@ -17,6 +19,9 @@ export function ServiceCard({ service, hidden, onSelect, cardRef }: ServiceCardP
       className="service-card"
       id={`servicio-${service.id}`}
       data-category={service.category}
+      data-service-layout={
+        service.id === "web" || service.id === "support" ? "featured" : "standard"
+      }
       hidden={hidden}
       ref={cardRef}
     >
@@ -24,6 +29,7 @@ export function ServiceCard({ service, hidden, onSelect, cardRef }: ServiceCardP
         <Icon className="service-icon" name={service.icon} />
         <span className="mono">{service.number}</span>
       </div>
+      <ServiceArtwork service={service.id} />
       <h3>{service.title ?? SERVICE_LABELS[service.id]}</h3>
       <p>{service.description}</p>
       <ul className="service-tags" aria-label="Incluye">

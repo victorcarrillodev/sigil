@@ -9,7 +9,6 @@ export function ContactSection({ selectedService }: ContactSectionProps) {
     <section className="contact-section" id="contacto" aria-labelledby="contact-title">
       <div className="container contact-grid">
         <div className="contact-copy">
-          <Eyebrow>04 / Tu siguiente paso</Eyebrow>
           <h2 id="contact-title">
             Hablemos de
             <br />
@@ -19,21 +18,8 @@ export function ContactSection({ selectedService }: ContactSectionProps) {
             ¿Qué quieres mejorar en tu negocio? Empieza por contarnos eso. No necesitas saber qué
             tecnología elegir para dar el primer paso.
           </p>
-          <div className="contact-note">
-            <span className="note-label mono">SITIO EN VALIDACIÓN</span>
-            <p>
-              Por ahora puedes preparar y guardar tu solicitud. El canal de contacto se habilitará
-              al terminar las pruebas.
-            </p>
-          </div>
-          <div className="contact-signature">
-            <img className="signature-logo" src="/sigil-emblem.jpg" width="40" height="40" alt="" />
-            <span>Ideas. Sistemas. Resultados.</span>
-          </div>
         </div>
-        <div className="contact-panel">
-          <ContactForm selectedService={selectedService} />
-        </div>
+        <ContactForm selectedService={selectedService} />
       </div>
     </section>
   );

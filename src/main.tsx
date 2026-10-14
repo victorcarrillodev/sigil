@@ -1,7 +1,7 @@
+import "./estilos/main.css";
 import { StrictMode } from "react";
 import { createRoot, hydrateRoot } from "react-dom/client";
 import App from "./App";
-import "./estilos/main.css";
 
 const root = document.getElementById("root");
 if (!root) throw new Error("No se encontró el contenedor de la aplicación.");

@@ -44,7 +44,6 @@ export function Services({ filter, onFilterChange, onServiceSelect }: ServicesPr
     <section className="section services container" id="servicios" aria-labelledby="services-title">
       <div className="section-heading">
         <div>
-          <Eyebrow>01 / Lo que hacemos</Eyebrow>
           <h2 id="services-title">
             ¿Qué necesita
             <br />
@@ -58,14 +57,12 @@ export function Services({ filter, onFilterChange, onServiceSelect }: ServicesPr
       </div>
       <div className="service-toolbar">
         <ServiceFilters value={filter} onChange={onFilterChange} total={SERVICES.length} />
-        <span className="toolbar-note mono" aria-hidden="true">
-          DE LA IDEA A LA IMPLEMENTACIÓN
-        </span>
+        <span className="toolbar-note">Explora lo que podemos hacer por tu negocio</span>
       </div>
       <p className="sr-only" id="services-status" role="status" aria-live="polite">
         Mostrando {visible.length} servicios.
       </p>
-      <div className="services-grid">
+      <div className="services-grid" data-filter={filter}>
         {SERVICES.map((service) => (
           <ServiceCard
             key={service.id}

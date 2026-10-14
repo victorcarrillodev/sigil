@@ -2,13 +2,12 @@ export function QuoteProposal() {
   return (
     <aside className="solution-example" id="ejemplo-integracion" aria-labelledby="example-title">
       <div className="example-heading">
-        <p className="mono">PARA DECIDIR CON CLARIDAD</p>
         <h3 id="example-title">
-          Antes de contratar,
+          Todo claro,
           <br />
-          conoce tu propuesta.
+          desde el principio.
         </h3>
-        <p>Te explicamos qué vamos a hacer, cuánto cuesta y cómo te lo entregamos.</p>
+        <p>Esto es lo que conocerás antes de contratar.</p>
       </div>
       {/* biome-ignore lint/a11y/noRedundantRoles: Safari needs this role for a list with list-style none outside nav. */}
       <ol className="example-flow" role="list">
@@ -17,12 +16,8 @@ export function QuoteProposal() {
             01
           </span>
           <div>
-            <h4>Qué vamos a resolver</h4>
-            <p>
-              Tu propuesta describe la solución, las funciones o instalaciones que incluye y lo que
-              necesitamos de ti para comenzar.
-            </p>
-            <span className="example-result">Alcance y entregables</span>
+            <h4>Qué incluye tu proyecto</h4>
+            <p>La solución, sus entregables y lo que necesitamos de ti para comenzar.</p>
           </div>
         </li>
         <li>
@@ -32,10 +27,8 @@ export function QuoteProposal() {
           <div>
             <h4>Cuánto vas a invertir</h4>
             <p>
-              Detallamos los costos del proyecto y distinguimos equipos, licencias, alojamiento y
-              mantenimiento cuando apliquen.
+              El costo del proyecto y los gastos de equipos, licencias o mantenimiento que apliquen.
             </p>
-            <span className="example-result">Costos y condiciones</span>
           </div>
         </li>
         <li>
@@ -43,12 +36,8 @@ export function QuoteProposal() {
             03
           </span>
           <div>
-            <h4>Cómo recibirás tu solución</h4>
-            <p>
-              Acordamos las etapas, los tiempos y las pruebas. También dejamos claro qué orientación
-              y soporte incluye la entrega.
-            </p>
-            <span className="example-result">Entrega y acompañamiento</span>
+            <h4>Cómo y cuándo lo recibirás</h4>
+            <p>Las etapas, los tiempos acordados y el acompañamiento incluido en la entrega.</p>
           </div>
         </li>
       </ol>
