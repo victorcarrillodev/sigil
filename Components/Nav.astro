@@ -1,0 +1,143 @@
+<nav class="container_nav" aria-label="Navegación principal">
+  <a class="logo_nav" href="/" aria-label="Sigil, inicio">
+    <span class="logo_mark" aria-hidden="true">S</span>
+    <strong class="title_nav">Sigil</strong>
+  </a>
+
+  <div class="links_nav">
+    <a href="#">Inicio</a>
+    <a href="#">Nosotros</a>
+    <a href="#">Cotización</a>
+  </div>
+
+  <button class="button_nav" type="button">Quiero adquirir</button>
+</nav>
+
+<style>
+  .container_nav {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 5.5rem;
+    padding: 0 clamp(1.25rem, 6vw, 5.5rem);
+    color: #f8f5ef;
+    background: #171715;
+    font-family: system-ui, sans-serif;
+  }
+
+  .logo_nav {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 0.65rem;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .logo_mark {
+    display: grid;
+    width: 2.25rem;
+    aspect-ratio: 1;
+    place-items: center;
+    color: #171715;
+    background: #d9b878;
+    border-radius: 50%;
+    font-family: Georgia, serif;
+    font-size: 1.2rem;
+  }
+
+  .title_nav {
+    font-size: 1.25rem;
+    letter-spacing: 0.04em;
+  }
+
+  .links_nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(1.25rem, 3vw, 2.75rem);
+  }
+
+  .links_nav a {
+    color: #d0cec8;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: color 160ms ease;
+  }
+
+  .links_nav a:hover,
+  .links_nav a:focus-visible {
+    color: #d9b878;
+  }
+
+  .button_nav {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.75rem;
+    padding: 0 1.25rem;
+    color: #171715;
+    background: #d9b878;
+    border: 1px solid #d9b878;
+    border-radius: 999px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 650;
+    transition:
+      background-color 160ms ease,
+      border-color 160ms ease,
+      transform 160ms ease;
+  }
+
+  .button_nav:hover {
+    background: #e7ca91;
+    border-color: #e7ca91;
+    transform: translateY(-1px);
+  }
+
+  .button_nav:focus-visible,
+  .logo_nav:focus-visible,
+  .links_nav a:focus-visible {
+    outline: 2px solid #f8f5ef;
+    outline-offset: 4px;
+  }
+
+  @media (max-width: 640px) {
+    .container_nav {
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+    }
+
+    .links_nav {
+      order: 1;
+      justify-content: space-between;
+      width: 100%;
+      padding-top: 0.25rem;
+    }
+
+    .links_nav a {
+      font-size: 0.85rem;
+    }
+
+    .button_nav {
+      min-height: 2.5rem;
+      padding-inline: 1rem;
+      font-size: 0.8rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
