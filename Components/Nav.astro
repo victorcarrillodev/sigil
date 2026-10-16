@@ -1,6 +1,6 @@
 <nav class="container_nav" aria-label="Navegación principal">
   <a class="logo_nav" href="/" aria-label="Sigil, inicio">
-    <span class="logo_mark" aria-hidden="true">S</span>
+    <img class="logo_mark" src="/logosigil.jpeg" alt="" />
     <strong class="title_nav">Sigil</strong>
   </a>
 
@@ -37,15 +37,12 @@
   }
 
   .logo_mark {
-    display: grid;
+    display: block;
     width: 2.25rem;
     aspect-ratio: 1;
-    place-items: center;
-    color: #171715;
-    background: #d9b878;
     border-radius: 50%;
-    font-family: Georgia, serif;
-    font-size: 1.2rem;
+    object-fit: cover;
+    object-position: center;
   }
 
   .title_nav {
