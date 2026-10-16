@@ -1,0 +1,312 @@
+---
+const servicios = [
+  "Sitio web o tienda en línea",
+  "Sistema de gestión",
+  "Software a la medida",
+  "Soporte TI y redes",
+  "Videovigilancia",
+  "Servidores y respaldos",
+  "Todavía no lo sé",
+];
+---
+
+<section class="contacto" id="cotizar">
+  <div class="container contacto_inner">
+    <div class="contacto_texto">
+      <h2>Hablemos de <br /><span class="accent">tu proyecto.</span></h2>
+      <p>
+        ¿Qué quieres mejorar en tu negocio? Empieza por contarnos eso. No
+        necesitas saber qué tecnología elegir para dar el primer paso.
+      </p>
+    </div>
+
+    <div class="form_card">
+      <h3>Prepara tu solicitud de cotización</h3>
+      <small class="form_aviso">Los campos con * son obligatorios.</small>
+
+      <form id="form_cotizar" novalidate>
+        <div class="fila">
+          <label>
+            <span>Tu nombre *</span>
+            <input type="text" name="nombre" placeholder="¿Cómo te llamas?" required />
+          </label>
+          <label>
+            <span>Empresa <em>(opcional)</em></span>
+            <input type="text" name="empresa" placeholder="Nombre de tu negocio" />
+          </label>
+        </div>
+
+        <label>
+          <span>Correo electrónico *</span>
+          <input type="email" name="correo" placeholder="tu@empresa.com" required />
+        </label>
+
+        <label>
+          <span>¿Qué necesitas? *</span>
+          <select name="servicio" required>
+            <option value="">Selecciona un servicio</option>
+            {servicios.map((s) => <option value={s}>{s}</option>)}
+          </select>
+        </label>
+
+        <label>
+          <span>Cuéntanos un poco más *</span>
+          <textarea
+            name="detalle"
+            maxlength="2000"
+            rows="4"
+            placeholder="¿Qué quieres mejorar en tu negocio? ¿Cómo trabaja hoy tu equipo?"
+            required></textarea>
+          <div class="contador_fila">
+            <small>Al menos 20 caracteres.</small>
+            <small id="conteo">0 / 2000</small>
+          </div>
+        </label>
+
+        <p class="error" id="error" hidden></p>
+
+        <button type="submit" class="btn_enviar">
+          <span>Preparar solicitud</span>
+          <span>→</span>
+        </button>
+
+        <small class="form_nota">
+          Este formulario crea un resumen en tu navegador. No envía ni almacena
+          tus datos en un servidor.
+        </small>
+      </form>
+
+      <div class="resumen" id="resumen" hidden>
+        <h4>Tu resumen</h4>
+        <pre id="resumen_texto"></pre>
+        <button type="button" id="copiar" class="btn_copiar">Copiar resumen</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById("form_cotizar") as HTMLFormElement;
+  const detalle = form.elements.namedItem("detalle") as HTMLTextAreaElement;
+  const conteo = document.getElementById("conteo")!;
+  const error = document.getElementById("error")!;
+  const resumen = document.getElementById("resumen")!;
+  const resumenTexto = document.getElementById("resumen_texto")!;
+  const copiar = document.getElementById("copiar") as HTMLButtonElement;
+
+  detalle.addEventListener("input", () => {
+    conteo.textContent = `${detalle.value.length} / 2000`;
+  });
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const datos = new FormData(form);
+    const nombre = String(datos.get("nombre") || "").trim();
+    const empresa = String(datos.get("empresa") || "").trim();
+    const correo = String(datos.get("correo") || "").trim();
+    const servicio = String(datos.get("servicio") || "");
+    const texto = String(datos.get("detalle") || "").trim();
+
+    let mensaje = "";
+    if (!nombre) mensaje = "Escribe tu nombre.";
+    else if (!/^\S+@\S+\.\S+$/.test(correo)) mensaje = "Escribe un correo válido.";
+    else if (!servicio) mensaje = "Selecciona qué necesitas.";
+    else if (texto.length < 20) mensaje = "Cuéntanos un poco más (mínimo 20 caracteres).";
+
+    if (mensaje) {
+      error.textContent = mensaje;
+      error.hidden = false;
+      resumen.hidden = true;
+      return;
+    }
+
+    error.hidden = true;
+    resumenTexto.textContent =
+      `Nombre: ${nombre}\n` +
+      (empresa ? `Empresa: ${empresa}\n` : "") +
+      `Correo: ${correo}\n` +
+      `Necesita: ${servicio}\n\n` +
+      `${texto}`;
+    resumen.hidden = false;
+  });
+
+  copiar.addEventListener("click", async () => {
+    await navigator.clipboard.writeText(resumenTexto.textContent || "");
+    copiar.textContent = "Copiado ✓";
+    setTimeout(() => (copiar.textContent = "Copiar resumen"), 2000);
+  });
+</script>
+
+<style>
+  .contacto {
+    background: var(--fondo);
+    color: var(--texto);
+    padding: 90px 0;
+  }
+
+  .contacto_inner {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .contacto_texto h2 {
+    font-size: 2.6rem;
+    line-height: 1.15;
+    margin: 0 0 24px;
+  }
+
+  .contacto_texto p {
+    max-width: 320px;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: var(--texto-suave);
+    margin: 0;
+  }
+
+  .form_card {
+    background: #111c28;
+    border: 1px solid #2a3a4a;
+    border-radius: 10px;
+    padding: 28px;
+  }
+
+  .form_card h3 {
+    margin: 0 0 6px;
+    font-size: 1rem;
+    color: #bfdbfe;
+  }
+
+  .form_aviso {
+    display: block;
+    margin-bottom: 22px;
+    font-size: 0.65rem;
+    color: var(--texto-suave);
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .fila {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  label span {
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+
+  label em {
+    font-weight: 400;
+    font-style: normal;
+    color: var(--texto-suave);
+    font-size: 0.6rem;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    box-sizing: border-box;
+    background: #0d1520;
+    color: var(--texto);
+    border: 1px solid #3d5a52;
+    border-radius: 4px;
+    padding: 11px 12px;
+    font-size: 0.75rem;
+    font-family: inherit;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--verde);
+  }
+
+  .contador_fila {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.6rem;
+    color: var(--texto-suave);
+  }
+
+  .error {
+    margin: 0;
+    font-size: 0.75rem;
+    color: #f59e4b;
+  }
+
+  .btn_enviar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--verde);
+    color: #0d1520;
+    border: none;
+    border-radius: 4px;
+    padding: 13px 16px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+
+  .form_nota {
+    font-size: 0.6rem;
+    line-height: 1.5;
+    color: var(--texto-suave);
+  }
+
+  .resumen {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #2a3a4a;
+  }
+
+  .resumen h4 {
+    margin: 0 0 10px;
+    font-size: 0.85rem;
+  }
+
+  .resumen pre {
+    margin: 0 0 12px;
+    padding: 12px;
+    background: #0d1520;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    color: var(--texto-suave);
+  }
+
+  .btn_copiar {
+    background: transparent;
+    color: var(--texto);
+    border: 1px solid #2a3a4a;
+    border-radius: 4px;
+    padding: 9px 14px;
+    font-size: 0.75rem;
+    cursor: pointer;
+  }
+
+  @media (max-width: 900px) {
+    .contacto_inner { grid-template-columns: 1fr; gap: 40px; }
+    .fila { grid-template-columns: 1fr; }
+  }
+</style>

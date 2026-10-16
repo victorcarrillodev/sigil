@@ -1,0 +1,231 @@
+---
+const pasos = [
+  {
+    num: "01",
+    titulo: "Entendemos",
+    texto: "Escuchamos lo que quieres lograr y conocemos cómo trabaja tu equipo para identificar dónde podemos ayudarte.",
+  },
+  {
+    num: "02",
+    titulo: "Definimos",
+    texto: "Te presentamos una propuesta con lo que construiremos, cuánto costará y los tiempos de entrega. Tú decides con toda la información.",
+  },
+  {
+    num: "03",
+    titulo: "Construimos",
+    texto: "Damos forma a tu solución por etapas. Revisamos los avances contigo y la probamos con las tareas que tu equipo realiza cada día.",
+  },
+  {
+    num: "04",
+    titulo: "Acompañamos",
+    texto: "Te entregamos tu solución y orientamos a tu equipo para usarla. También acordamos el soporte y mantenimiento que necesites.",
+  },
+];
+
+const preguntas = [
+  {
+    q: "¿Qué información ayuda a comenzar?",
+    a: "Una descripción de tu negocio, lo que quieres resolver y las herramientas que usas hoy. Si no tienes todo claro, lo definimos juntos.",
+  },
+  {
+    q: "¿Pueden trabajar con lo que ya tenemos?",
+    a: "Sí. Revisamos tus sistemas, equipos y redes actuales y vemos qué conviene conservar y qué conviene mejorar.",
+  },
+  {
+    q: "¿Necesito saber exactamente qué solución quiero?",
+    a: "No. Cuéntanos el problema y te ayudamos a definir la solución.",
+  },
+  {
+    q: "¿Cómo se determina el costo y el tiempo?",
+    a: "Depende del alcance del proyecto. Después de escucharte te enviamos una propuesta con costo y tiempos de entrega.",
+  },
+  {
+    q: "¿Qué pasa después de la entrega?",
+    a: "Te orientamos para usar la solución y acordamos el soporte y mantenimiento que necesites.",
+  },
+  {
+    q: "¿El alojamiento, los equipos y el soporte están incluidos?",
+    a: "Lo especificamos en la propuesta para que sepas desde el inicio qué está incluido y qué se cotiza aparte.",
+  },
+];
+---
+
+<section class="proceso" id="trabajo">
+  <div class="container">
+    <div class="proceso_top">
+      <h2>Un buen resultado <br /> empieza con claridad.</h2>
+      <p>
+        Te acompañamos desde la primera idea hasta la entrega. En cada etapa
+        sabes qué estamos haciendo y cuál es el siguiente paso.
+      </p>
+    </div>
+
+    <ol class="pasos">
+      {pasos.map((p) => (
+        <li class="paso">
+          <span class="paso_num">{p.num}</span>
+          <h3>{p.titulo}</h3>
+          <p>{p.texto}</p>
+        </li>
+      ))}
+    </ol>
+
+    <div class="faq">
+      <div class="faq_titulo">
+        <small>ANTES DE EMPEZAR</small>
+        <h2>Resolvemos <br /> tus dudas.</h2>
+      </div>
+
+      <div class="faq_lista">
+        {preguntas.map((f) => (
+          <details class="faq_item">
+            <summary>
+              <span>{f.q}</span>
+              <span class="faq_flecha">→</span>
+            </summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .proceso {
+    background: var(--fondo);
+    color: var(--texto);
+    padding: 80px 0;
+  }
+
+  .proceso_top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+
+  .proceso_top h2 {
+    font-size: 2.4rem;
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  .proceso_top p {
+    max-width: 340px;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--texto-suave);
+    margin: 0;
+  }
+
+  .pasos {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 90px;
+    border-bottom: 1px solid #2a3a4a;
+  }
+
+  .paso {
+    display: grid;
+    grid-template-columns: 80px 200px 1fr;
+    align-items: center;
+    gap: 20px;
+    padding: 28px 0;
+    border-top: 1px solid #2a3a4a;
+  }
+
+  .paso_num {
+    font-size: 1.8rem;
+    color: var(--texto-suave);
+  }
+
+  .paso h3 {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  .paso p {
+    margin: 0;
+    color: var(--texto-suave);
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+
+  .faq {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 60px;
+  }
+
+  .faq_titulo small {
+    color: var(--texto-suave);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+  }
+
+  .faq_titulo h2 {
+    margin: 16px 0 0;
+    font-size: 2.4rem;
+    line-height: 1.15;
+  }
+
+  .faq_item {
+    border-top: 1px solid #2a3a4a;
+  }
+
+  .faq_item:last-child {
+    border-bottom: 1px solid #2a3a4a;
+  }
+
+  .faq_item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px 0;
+    cursor: pointer;
+    font-size: 0.9rem;
+    list-style: none;
+  }
+
+  .faq_item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq_flecha {
+    color: var(--verde);
+    transition: transform 160ms ease;
+  }
+
+  .faq_item[open] .faq_flecha {
+    transform: rotate(90deg);
+  }
+
+  .faq_item p {
+    margin: 0;
+    padding: 0 32px 20px 0;
+    color: var(--texto-suave);
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 700px) {
+    .proceso_top,
+    .faq {
+      grid-template-columns: 1fr;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .paso {
+      grid-template-columns: 48px 1fr;
+      gap: 12px 16px;
+    }
+
+    .paso p {
+      grid-column: 2;
+    }
+  }
+</style>

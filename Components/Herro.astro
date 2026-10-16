@@ -1,0 +1,148 @@
+
+<section class="herro">
+  <div class="container herro_inner">
+    <div class="texts_herros">
+      <h1>Web, software <br /> y <span class="accent">soporte.</span></h1>
+
+      <p class="description">
+        En Sigil creamos sitios web, sistemas de gestión y redes para tu negocio.
+        Presenta lo que vendes, organiza tu trabajo y mantén a tu equipo conectado.
+      </p>
+
+      <div class="buttons">
+        <a href="#cotizar" class="btn_primary">Quiero cotizar</a>
+        <a href="#servicios" class="btn_link">Ver qué necesito</a>
+      </div>
+
+    </div>
+
+    <div class="media_herro">
+      <div class="media">
+        <span class="label label_1">01 / SOFTWARE</span>
+        <span class="label label_2">02 / INFRAESTRUCTURA</span>
+        <span class="label label_3">03 / OPERACIÓN</span>
+      </div>
+      <div class="controls">
+        <p>Mueve el cursor. Explora el símbolo.</p>
+        <button>Descomponer</button>
+        <button>Pausar</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <style>
+  :root {
+    --fondo: #0d1520;
+    --verde: #a3f98f;
+    --texto: #e8edf2;
+    --texto-suave: #9aa8b5;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .herro {
+    background: var(--fondo);
+    color: var(--texto);
+    padding: 80px 0;
+  }
+
+  .herro_inner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+  }
+
+  .texts_herros {
+    flex: 1;
+    max-width: 560px;
+  }
+
+  h1 {
+    font-size: 4.5rem;
+    line-height: 1.1;
+    margin: 0 0 24px;
+  }
+
+  .accent {
+    color: var(--verde);
+  }
+
+  .description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--texto-suave);
+    text-align: left;
+    margin: 0 0 32px;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .btn_primary {
+    background: var(--verde);
+    color: #0d1520;
+    font-weight: 600;
+    padding: 16px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+  }
+
+  .btn_link {
+    color: var(--texto);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .media_herro {
+    flex: 1;
+    position: relative;
+  }
+
+  .media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+  }
+
+  .label {
+    position: absolute;
+    font-family: monospace;
+    font-size: 0.7rem;
+    color: var(--verde);
+  }
+
+  .label_1 { top: 5%; right: 0; }
+  .label_2 { top: 50%; right: 0; }
+  .label_3 { bottom: 15%; left: 0; }
+
+  .controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 20px;
+    font-size: 0.85rem;
+    color: var(--texto-suave);
+  }
+
+  .controls button {
+    background: transparent;
+    color: var(--texto);
+    border: 1px solid #2a3a4a;
+    padding: 10px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+</style>

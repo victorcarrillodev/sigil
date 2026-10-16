@@ -1,0 +1,235 @@
+---
+const puntos = [
+  {
+    titulo: "Qué incluye tu proyecto",
+    texto: "La solución, sus entregables y lo que necesitamos de ti para comenzar.",
+  },
+  {
+    titulo: "Cuánto vas a invertir",
+    texto: "El costo del proyecto y los gastos de equipos, licencias o mantenimiento que apliquen.",
+  },
+  {
+    titulo: "Cómo y cuándo lo recibirás",
+    texto: "Las etapas, los tiempos acordados y el acompañamiento incluido en la entrega.",
+  },
+];
+
+const pilares = [
+  {
+    titulo: "Empieza con lo que necesitas",
+    texto: "Te explicamos cuándo conviene conectarlo con otras herramientas que ya utilizas.",
+  },
+  {
+    titulo: "Trato directo",
+    texto: "Hablas con el equipo que desarrolla tu proyecto. Resolvemos tus dudas y revisamos contigo cada avance.",
+  },
+  {
+    titulo: "Una entrega que puedes usar",
+    texto: "Probamos la solución contigo y te damos los accesos y la orientación acordados para que tu equipo pueda usarla.",
+  },
+];
+---
+
+<section class="claro_sec" id="enfoque">
+  <div class="container">
+    <div class="claro_top">
+      <div class="claro_texto">
+        <h2>
+          La tecnología <br />
+          debería resolver. <br />
+          <span class="suave">No complicar.</span>
+        </h2>
+
+        <p>
+          Tu web, tus sistemas y tu red forman parte del mismo negocio. Los
+          conectamos para que la información fluya y tu equipo pueda trabajar
+          con menos pasos y más claridad.
+        </p>
+        <p>
+          Primero escuchamos lo que necesitas. Después te proponemos una
+          solución pensada para tu operación, tus prioridades y tu presupuesto.
+        </p>
+
+        <a href="#trabajo" class="claro_link">Así lo llevamos a la práctica →</a>
+      </div>
+
+      <aside class="claro_card">
+        <h3>Todo claro, <br />desde el principio.</h3>
+        <p class="claro_sub">Esto es lo que conocerás antes de contratar.</p>
+
+        <ul class="puntos">
+          {puntos.map((p) => (
+            <li>
+              <span class="icono">•••</span>
+              <div>
+                <strong>{p.titulo}</strong>
+                <p>{p.texto}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        <small class="claro_nota">
+          Primero revisas la propuesta. Después decides si quieres trabajar con Sigil.
+        </small>
+      </aside>
+    </div>
+
+    <div class="pilares">
+      {pilares.map((p) => (
+        <div class="pilar">
+          <strong><span class="comillas">“</span> {p.titulo}</strong>
+          <p>{p.texto}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .claro_sec {
+    --verde-oscuro: #1f3d2e;
+    --gris-verde: #6f8577;
+    background: #e9efe6;
+    color: var(--verde-oscuro);
+    padding: 90px 0 60px;
+  }
+
+  .claro_top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 80px;
+  }
+
+  .claro_texto {
+    flex: 1;
+    max-width: 480px;
+  }
+
+  .claro_texto h2 {
+    font-size: 2.6rem;
+    line-height: 1.15;
+    margin: 0 0 28px;
+  }
+
+  .suave {
+    color: var(--gris-verde);
+  }
+
+  .claro_texto p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #4a5d51;
+    margin: 0 0 18px;
+  }
+
+  .claro_link {
+    display: inline-block;
+    margin-top: 12px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--verde-oscuro);
+    color: var(--verde-oscuro);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .claro_card {
+    flex: 1;
+    max-width: 520px;
+    background: #fff;
+    border: 1px solid #cfdccb;
+    border-radius: 10px;
+    padding: 32px;
+    box-shadow: 0 10px 30px rgba(31, 61, 46, 0.08);
+  }
+
+  .claro_card h3 {
+    font-size: 1.6rem;
+    line-height: 1.2;
+    margin: 0 0 12px;
+  }
+
+  .claro_sub {
+    font-size: 0.8rem;
+    color: var(--gris-verde);
+    margin: 0 0 24px;
+  }
+
+  .puntos {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+  }
+
+  .puntos li {
+    display: flex;
+    gap: 16px;
+    padding: 18px 0;
+    border-top: 1px solid #e3ebe0;
+  }
+
+  .icono {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border: 1px solid #cfdccb;
+    border-radius: 50%;
+    font-size: 0.5rem;
+    letter-spacing: 1px;
+    color: var(--gris-verde);
+  }
+
+  .puntos strong {
+    font-size: 0.9rem;
+  }
+
+  .puntos p {
+    margin: 6px 0 0;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: #5d7065;
+  }
+
+  .claro_nota {
+    display: block;
+    padding-top: 16px;
+    border-top: 1px solid #e3ebe0;
+    font-size: 0.7rem;
+    color: var(--gris-verde);
+  }
+
+  .pilares {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-top: 70px;
+    padding-top: 28px;
+    border-top: 1px solid #cfdccb;
+  }
+
+  .pilar strong {
+    font-size: 0.85rem;
+  }
+
+  .comillas {
+    color: var(--gris-verde);
+    margin-right: 6px;
+  }
+
+  .pilar p {
+    margin: 8px 0 0;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: #5d7065;
+  }
+
+  @media (max-width: 900px) {
+    .claro_top { flex-direction: column; gap: 40px; }
+    .claro_card { max-width: 100%; }
+    .pilares { grid-template-columns: 1fr; gap: 24px; }
+  }
+</style>

@@ -1,0 +1,289 @@
+---
+const servicios = [
+  {
+    titulo: "Sitios web y tiendas en línea",
+    texto: "Presenta tus servicios o vende tus productos con una web que facilite a tus clientes dar el siguiente paso.",
+    tags: ["Sitios web", "Portafolios", "Comercio electrónico"],
+    cta: "Cotizar mi web",
+    categoria: "software",
+    clase: "claro",
+  },
+  {
+    titulo: "Sistemas de gestión",
+    texto: "Reúne ventas, clientes e inventarios en un sistema que tu equipo pueda consultar y mantener al día.",
+    tags: ["Clientes y ventas", "Inventarios", "Paneles de control"],
+    cta: "Cotizar mi sistema",
+    categoria: "software",
+    clase: "oscuro",
+  },
+  {
+    titulo: "Software a tu medida",
+    texto: "Creamos herramientas para tu forma de trabajar y conectamos tus aplicaciones para reducir la captura manual de datos.",
+    tags: ["Integraciones", "Automatización", "Aplicaciones"],
+    cta: "Cotizar software a medida",
+    categoria: "software",
+    clase: "oscuro",
+  },
+  {
+    titulo: "Soporte TI y redes",
+    texto: "Resolvemos fallas de conexión y equipos. Revisamos tu instalación y atendemos el mantenimiento que necesites.",
+    tags: ["Redes", "Wi-Fi empresarial", "Mantenimiento"],
+    cta: "Cotizar soporte y redes",
+    categoria: "infra",
+    clase: "verde",
+  },
+  {
+    titulo: "Videovigilancia",
+    texto: "Instalamos cámaras según tus espacios y configuramos el acceso a las grabaciones para que puedas consultar lo que ocurre.",
+    tags: ["Cámaras IP", "Grabación NVR", "Acceso remoto"],
+    cta: "Cotizar mis cámaras",
+    categoria: "infra",
+    clase: "oscuro naranja",
+  },
+  {
+    titulo: "Servidores y respaldos",
+    texto: "Organizamos dónde guardar tu información, quién puede acceder y cómo recuperarla ante un imprevisto.",
+    tags: ["Servidores", "Nube", "Copias de seguridad"],
+    cta: "Cotizar servidores y respaldos",
+    categoria: "infra",
+    clase: "oscuro amarillo",
+  },
+];
+---
+
+<section class="servicios" id="servicios">
+  <div class="container">
+    <div class="servicios_top">
+      <h2>¿Qué necesita <br /> tu negocio hoy?</h2>
+      <p>
+        Una web para mostrar tus servicios, un sistema para llevar tus ventas o
+        una red que funcione mejor. Podemos ayudarte con una necesidad puntual
+        o con varias a la vez.
+      </p>
+    </div>
+
+    <div class="tabs_row">
+      <div class="tabs">
+        <button class="tab activa" data-filtro="todos">
+          Todos los servicios <span class="contador">06</span>
+        </button>
+        <button class="tab" data-filtro="software">Software y web</button>
+        <button class="tab" data-filtro="infra">Infraestructura</button>
+      </div>
+      <small>Explora lo que podemos hacer por tu negocio</small>
+    </div>
+
+    <div class="grid">
+      {servicios.map((s) => (
+        <article class={`card ${s.clase}`} data-categoria={s.categoria}>
+          <div class="card_media"></div>
+          <h3>{s.titulo}</h3>
+          <p>{s.texto}</p>
+          <ul class="tags">
+            {s.tags.map((t) => <li>{t}</li>)}
+          </ul>
+          <a href="#cotizar" class="card_cta">
+            <span>{s.cta}</span>
+            <span>↗</span>
+          </a>
+        </article>
+      ))}
+    </div>
+
+    <div class="banner">
+      <p>¿Necesitas conectar varias soluciones? En Sigil las trabajamos como un solo proyecto.</p>
+      <a href="#cotizar">Preparar mi proyecto →</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>(".tab");
+  const cards = document.querySelectorAll<HTMLElement>(".card");
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      tabs.forEach((t) => t.classList.remove("activa"));
+      tab.classList.add("activa");
+      const filtro = tab.dataset.filtro;
+      cards.forEach((card) => {
+        const visible = filtro === "todos" || card.dataset.categoria === filtro;
+        card.style.display = visible ? "flex" : "none";
+      });
+    });
+  });
+</script>
+
+<style>
+  .servicios {
+    background: var(--fondo);
+    color: var(--texto);
+    padding: 80px 0;
+  }
+
+  .servicios_top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+
+  .servicios_top h2 {
+    font-size: 3rem;
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  .servicios_top p {
+    max-width: 420px;
+    color: var(--texto-suave);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .tabs_row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+
+  .tabs_row small {
+    color: var(--texto-suave);
+  }
+
+  .tabs {
+    display: flex;
+    gap: 4px;
+    padding: 5px;
+    border: 1px solid #2a3a4a;
+    border-radius: 8px;
+  }
+
+  .tab {
+    background: transparent;
+    color: var(--texto-suave);
+    border: none;
+    padding: 12px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+
+  .tab.activa {
+    background: var(--verde);
+    color: #0d1520;
+    font-weight: 600;
+  }
+
+  .contador {
+    margin-left: 10px;
+    font-size: 0.75rem;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+    min-height: 300px;
+    border: 1px solid #2a3a4a;
+    border-radius: 10px;
+    background: #111c28;
+  }
+
+  .card.claro {
+    background: #e6f4dc;
+    color: #0d1520;
+    border-color: #cfe5c2;
+  }
+
+  .card.claro p { color: #3c4a3a; }
+
+  .card.verde {
+    background: #0f3a28;
+    border-color: #1c5a3f;
+  }
+
+  .card.naranja h3 { color: #f59e4b; }
+  .card.amarillo h3 { color: #f5d04b; }
+
+  .card_media {
+    height: 120px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .card h3 {
+    margin: 8px 0 0;
+    font-size: 1.1rem;
+  }
+
+  .card p {
+    margin: 0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--texto-suave);
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.7rem;
+    opacity: 0.8;
+  }
+
+  .tags li::before {
+    content: "• ";
+    color: var(--verde);
+  }
+
+  .card_cta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: inherit;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+    padding: 18px 24px;
+    border: 1px solid #2a3a4a;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    color: var(--texto-suave);
+  }
+
+  .banner p { margin: 0; }
+
+  .banner a {
+    color: var(--verde);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  @media (max-width: 900px) {
+    .servicios_top,
+    .tabs_row { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>

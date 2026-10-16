@@ -1,0 +1,157 @@
+---
+const anio = new Date().getFullYear();
+
+const columnas = [
+  {
+    titulo: "Software y web",
+    links: [
+      { texto: "Web y comercio electrónico", href: "#servicios" },
+      { texto: "Sistemas de gestión", href: "#servicios" },
+      { texto: "Software a medida", href: "#servicios" },
+    ],
+  },
+  {
+    titulo: "Infraestructura",
+    links: [
+      { texto: "Soporte TI y redes", href: "#servicios" },
+      { texto: "Videovigilancia", href: "#servicios" },
+      { texto: "Servidores y respaldos", href: "#servicios" },
+    ],
+  },
+  {
+    titulo: "Tu proyecto",
+    links: [
+      { texto: "Nuestro enfoque", href: "#enfoque" },
+      { texto: "Cómo trabajamos", href: "#trabajo" },
+      { texto: "Preguntas frecuentes", href: "#trabajo" },
+      { texto: "Quiero cotizar", href: "#cotizar" },
+    ],
+  },
+];
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer_top">
+      <div class="footer_marca">
+        <a href="/" class="footer_logo">
+          <img src="/logo.png" alt="Sigil" width="48" height="48" />
+          <div>
+            <span class="footer_nombre">SIGIL</span>
+            <small>Soluciones digitales</small>
+          </div>
+        </a>
+        <p>Web, software e infraestructura para tu negocio.</p>
+      </div>
+
+      {columnas.map((c) => (
+        <nav class="footer_col">
+          <h4>{c.titulo}</h4>
+          <ul>
+            {c.links.map((l) => (
+              <li><a href={l.href}>{l.texto}</a></li>
+            ))}
+          </ul>
+        </nav>
+      ))}
+    </div>
+
+    <div class="footer_bottom">
+      <small>© {anio} Sigil · Soluciones digitales</small>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--fondo);
+    color: var(--texto);
+    border-top: 1px solid #2a3a4a;
+    padding: 24px 0 0;
+  }
+
+  .footer_top {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 32px;
+  }
+
+  .footer_logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: inherit;
+    text-decoration: none;
+    margin-bottom: 20px;
+  }
+
+  .footer_logo img {
+    border: 1px solid #2a3a4a;
+    object-fit: cover;
+  }
+
+  .footer_nombre {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+  }
+
+  .footer_logo small {
+    font-size: 0.6rem;
+    color: var(--texto-suave);
+  }
+
+  .footer_marca p {
+    max-width: 260px;
+    margin: 0;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--texto-suave);
+  }
+
+  .footer_col h4 {
+    margin: 0 0 18px;
+    font-size: 0.95rem;
+  }
+
+  .footer_col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .footer_col a {
+    color: var(--texto-suave);
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: color 0.2s;
+  }
+
+  .footer_col a:hover {
+    color: var(--verde);
+  }
+
+  .footer_bottom {
+    padding: 18px 0 24px;
+    border-top: 1px solid #2a3a4a;
+  }
+
+  .footer_bottom small {
+    font-size: 0.75rem;
+    color: var(--texto-suave);
+  }
+
+  @media (max-width: 900px) {
+    .footer_top { grid-template-columns: 1fr 1fr; }
+    .footer_marca { grid-column: 1 / -1; }
+  }
+
+  @media (max-width: 560px) {
+    .footer_top { grid-template-columns: 1fr; }
+  }
+</style>
