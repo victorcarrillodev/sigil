@@ -1,18 +1,55 @@
 ---
 import Nav from '../../Components/Nav.astro';
+import Herro from '../../Components/Herro.astro';
+import Servicios from '../../Components/Servicios.astro';
+import Section1 from '../../Components/section1.astro';
+import Preguntas from '../../Components/Preguntas.astro';
+import Contacto from '../../Components/contacto.astro';
+import Footer from '../../Components/Footer.astro';
 ---
 
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>Sigil — Web, software y soporte</title>
 	</head>
 	<body>
 		<Nav />
-		<h1>Astro</h1>
+		<Herro />
+		<Servicios />
+		<Section1 />
+		<Preguntas />
+		<Contacto />
+		<Footer />
 	</body>
 </html>
+
+<style is:global>
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+
+	:root {
+		--fondo: #0d1520;
+		--verde: #a3f98f;
+		--texto: #e8edf2;
+		--texto-suave: #9aa8b5;
+	}
+
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 20px;
+	}
+
+	body {
+		background: var(--fondo);
+		color: var(--texto);
+	}
+</style>
