@@ -2,7 +2,7 @@
 <section class="herro">
   <div class="container herro_inner">
     <div class="texts_herros">
-      <h1>Web, software <br /> y <span class="accent">soporte.</span></h1>
+      <h1>Web, software <br /> y <strong class="accent">soporte.</strong></h1>
 
       <p class="description">
         En Sigil creamos sitios web, sistemas de gestión y redes para tu negocio.
@@ -17,16 +17,8 @@
     </div>
 
     <div class="media_herro">
-      <div class="media">
-        <span class="label label_1">01 / SOFTWARE</span>
-        <span class="label label_2">02 / INFRAESTRUCTURA</span>
-        <span class="label label_3">03 / OPERACIÓN</span>
-      </div>
-      <div class="controls">
-        <p>Mueve el cursor. Explora el símbolo.</p>
-        <button>Descomponer</button>
-        <button>Pausar</button>
-      </div>
+    
+    
     </div>
   </div>
 </section>
@@ -41,16 +33,17 @@
   }
 
   .container {
+    background-image: url("");
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
   }
 
-  .herro {
-    background: var(--fondo);
-    color: var(--texto);
-    padding: 80px 0;
-  }
+ .herro {
+  background: url('/hero-bg.svg') center / cover no-repeat, var(--fondo);
+  color: var(--texto);
+  padding: 80px 0;
+}
 
   .herro_inner {
     display: flex;
